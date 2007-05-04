@@ -1,9 +1,6 @@
-# THIS PACKAGE IS HOSTED AT MANDRIVA SVN
-# PLEASE DO NOT UPLOAD DIRECTLY BEFORE COMMIT
-
 %define	name	opensc
-%define version 0.11.1
-%define release %mkrel 2
+%define version 0.11.2
+%define release %mkrel 1
 
 %define major 2
 %define libname %mklibname %{name}
@@ -17,12 +14,6 @@ Group:		System/Kernel and hardware
 URL:		http://www.opensc.org/
 Source:		http://www.opensc.org/files/%{name}-%{version}.tar.gz
 Source1:	oberthur.profile
-# based on http://keitin.net/jarpatus/projects/usbtoken/opensc.readpin.patch
-Patch:		opensc-0.10.0-pinstdin.patch
-# http://www.opensc-project.org/pipermail/opensc-user/2006-June/001058.html
-# http://www.opensc-project.org/opensc/changeset/2977
-# http://www.opensc-project.org/opensc/changeset/3030
-Patch1:		opensc-0.11.1-oberthurfix.patch
 BuildRequires:	flex
 BuildRequires:	X11-devel
 BuildRequires:	libopenct-devel
@@ -100,8 +91,6 @@ smartcard library.
 
 %prep
 %setup -q
-%patch -p1 -b .stdin
-%patch1 -p0 -b .oberthurfix
 install -m 0644 %{_sourcedir}/oberthur.profile oberthur-alternate.profile
 
 %build
