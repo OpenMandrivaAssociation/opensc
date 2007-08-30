@@ -1,9 +1,10 @@
 %define	name	opensc
-%define version 0.11.2
+%define version 0.11.3
 %define release %mkrel 1
 
 %define major 2
 %define libname %mklibname %{name}
+%define develname %mklibname -d %{name}
 
 Summary:	Library for accessing SmartCard devices
 Name:		%{name}
@@ -55,7 +56,7 @@ keys on the SmartCard is at the moment possible only with PKCS #15
 compatible cards.
 
 
-%package -n	%{libname}%{major}-devel
+%package -n	%{develname}
 Summary:	Development related files for %{name}
 Group:		Development/C
 License:	LGPL
@@ -63,8 +64,9 @@ Provides: 	%{libname}-devel = %{version}-%{release}
 Provides: 	%{name}-devel = %{version}-%{release}
 Requires:	%{libname}%{major} = %{version}
 Conflicts:	%{libname}0-devel
+Obsoletes:      %{libname}2-devel < 0.11.3
 
-%description -n	%{libname}%{major}-devel
+%description -n	%{develname}
 %{name} is a library for accessing smart card devices using PC/SC Lite
 middleware package. It is also the core library of the OpenSC project.
 Basic functionality (e.g. SELECT FILE, READ BINARY) should work on any
@@ -161,8 +163,10 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/opensc.conf
 %{_libdir}/opensc-pkcs11.*
 %{_libdir}/lib*.so.*
+%{_libdir}/onepin-opensc-pkcs11.so
 
-%files -n %{libname}%{major}-devel
+
+%files -n %{develname}
 %defattr(-,root,root)
 %doc doc/ChangeLog
 %multiarch %{multiarch_bindir}/opensc-config
@@ -174,10 +178,10 @@ rm -rf %{buildroot}
 %{_includedir}/*
 %{_mandir}/man1/opensc-config*
 %{_mandir}/man3/*
+%{_libdir}/onepin-opensc-pkcs11.a
+%{_libdir}/onepin-opensc-pkcs11.la
 
 %files -n mozilla-plugin-%{name}
 %defattr(-,root,root)
 %{_libdir}/mozilla/plugins/*.so
-
-
 
