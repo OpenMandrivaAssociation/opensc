@@ -1,5 +1,5 @@
 %define	name	opensc
-%define version 0.11.3
+%define version 0.11.4
 %define release %mkrel 1
 
 %define major 2
