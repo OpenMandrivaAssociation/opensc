@@ -27,6 +27,7 @@ BuildRequires:	libassuan-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	openssl-devel
 Requires:	pinentry
+Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 %{name} is a library for accessing smart card devices using PC/SC Lite
