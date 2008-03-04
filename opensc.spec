@@ -1,5 +1,5 @@
 %define	name	opensc
-%define version 0.11.4
+%define version 0.11.3
 
 %define major 2
 %define libname %mklibname %{name}
@@ -183,4 +183,3 @@ rm -rf %{buildroot}
 %files -n mozilla-plugin-%{name}
 %defattr(-,root,root)
 %{_libdir}/mozilla/plugins/*.so
-
