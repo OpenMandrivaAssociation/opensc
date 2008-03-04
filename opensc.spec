@@ -1,6 +1,5 @@
 %define	name	opensc
 %define version 0.11.4
-%define release %mkrel 1
 
 %define major 2
 %define libname %mklibname %{name}
@@ -9,7 +8,7 @@
 Summary:	Library for accessing SmartCard devices
 Name:		%{name}
 Version:	%{version}
-Release:	%{release}
+Release:	%mkrel 2
 License:	GPL
 Group:		System/Kernel and hardware
 URL:		http://www.opensc.org/
