@@ -129,8 +129,12 @@ rm -f %{buildroot}%{_libdir}/pkcs11-spy.a \
 %preun
 %_remove_install_info %{name}.info
 
+%if %mdkversion < 200900
 %post -n %{libname}%{major} -p /sbin/ldconfig
+%endif
+%if %mdkversion < 200900
 %postun -n %{libname}%{major} -p /sbin/ldconfig
+%endif
 
 %clean
 rm -rf %{buildroot}
