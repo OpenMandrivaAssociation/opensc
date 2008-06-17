@@ -8,7 +8,7 @@
 Summary:	Library for accessing SmartCard devices
 Name:		%{name}
 Version:	%{version}
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	GPL
 Group:		System/Kernel and hardware
 URL:		http://www.opensc.org/
