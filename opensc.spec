@@ -1,19 +1,17 @@
-%define	name	opensc
-%define version 0.11.3
-
 %define major 2
-%define libname %mklibname %{name}
+%define libname %mklibname %{name} %{major}
 %define develname %mklibname -d %{name}
 
 Summary:	Library for accessing SmartCard devices
-Name:		%{name}
-Version:	%{version}
-Release:	%mkrel 3
+Name:		opensc
+Version:	0.11.4
+Release:	%mkrel 1
 License:	GPL
 Group:		System/Kernel and hardware
 URL:		http://www.opensc.org/
 Source:		http://www.opensc.org/files/%{name}-%{version}.tar.gz
 Source1:	oberthur.profile
+Patch0:		opensc-linkage_fix.diff
 BuildRequires:	flex
 BuildRequires:	X11-devel
 BuildRequires:	libopenct-devel
@@ -36,17 +34,16 @@ ISO 7816-4 compatible smart card. Encryption and decryption using private
 keys on the SmartCard is at the moment possible only with PKCS #15
 compatible cards.
 
-
-%package -n	%{libname}%{major}
+%package -n	%{libname}
 Summary:	Library for accessing SmartCard devices
 Group:		System/Libraries
 License:	LGPL
 Provides: 	%{libname} = %{version}-%{release}
 # because we moved the config file and some modules from the %{name} package
-# to the %{libname}%{major} package
+# to the %{libname} package
 Conflicts:	%{name} < 0.10.0-1mdk
 
-%description -n	%{libname}%{major}
+%description -n	%{libname}
 %{name} is a library for accessing smart card devices using PC/SC Lite
 middleware package. It is also the core library of the OpenSC project.
 Basic functionality (e.g. SELECT FILE, READ BINARY) should work on any
@@ -54,16 +51,15 @@ ISO 7816-4 compatible smart card. Encryption and decryption using private
 keys on the SmartCard is at the moment possible only with PKCS #15
 compatible cards.
 
-
 %package -n	%{develname}
 Summary:	Development related files for %{name}
 Group:		Development/C
 License:	LGPL
-Provides: 	%{libname}-devel = %{version}-%{release}
+Provides: 	lib%{name}-devel = %{version}-%{release}
 Provides: 	%{name}-devel = %{version}-%{release}
-Requires:	%{libname}%{major} = %{version}
-Conflicts:	%{libname}0-devel
-Obsoletes:      %{libname}2-devel < 0.11.3
+Requires:	%{libname} = %{version}
+Conflicts:	%{mklibname opensc 0 -d}
+Obsoletes:      %{mklibname opensc 2 -d} < 0.11.3
 
 %description -n	%{develname}
 %{name} is a library for accessing smart card devices using PC/SC Lite
@@ -76,14 +72,13 @@ compatible cards.
 This package contains all necessary files to develop or compile any
 applications or libraries that use %{name}. 
 
-
 %package -n	mozilla-plugin-%{name}
 Summary:	OpenSC Mozilla plugin
 Group:		Networking/WWW
-# could be just opensc-pkcs11.so instead of %{libname}%{major}, but
+# could be just opensc-pkcs11.so instead of %{libname}, but
 # the opensc-pkcs11.so object doesn't have a versioned soname so we
 # can't risk using it
-Requires:	%{libname}%{major} = %{version}
+Requires:	%{libname} = %{version}
 Requires:	mozilla-firefox
 
 %description -n	mozilla-plugin-%{name}
@@ -91,17 +86,27 @@ This mozilla plugins handles web signatures using OpenSC
 smartcard library.
 
 %prep
+
 %setup -q
+%patch0 -p0
+
 install -m 0644 %{_sourcedir}/oberthur.profile oberthur-alternate.profile
 
 %build
+libtoolize --copy --force
+aclocal -I aclocal
+autoconf
+autoheader
+automake
+
 %configure2_5x \
-	--with-pin-entry=%{_bindir}/pinentry
+    --with-pin-entry=%{_bindir}/pinentry
 
 %make
 
 %install
 rm -rf %{buildroot}
+
 %makeinstall_std
 
 # install conf file
@@ -109,13 +114,13 @@ mkdir -p %{buildroot}%{_sysconfdir}
 install -m 0644 etc/opensc.conf %{buildroot}%{_sysconfdir}
 
 pushd %{buildroot}
-
 # move mozilla plugin to correct place
 mkdir -p .%{_libdir}/mozilla/plugins
 mv .%{_libdir}/opensc-signer.so .%{_libdir}/mozilla/plugins/
 rm -f .%{_libdir}/opensc-signer.*
-
 popd
+
+rm -rf %{buildroot}/usr/lib/mozilla/plugins
 
 # remove useless files
 rm -f %{buildroot}%{_libdir}/pkcs11-spy.a \
@@ -130,10 +135,11 @@ rm -f %{buildroot}%{_libdir}/pkcs11-spy.a \
 %_remove_install_info %{name}.info
 
 %if %mdkversion < 200900
-%post -n %{libname}%{major} -p /sbin/ldconfig
+%post -n %{libname} -p /sbin/ldconfig
 %endif
+
 %if %mdkversion < 200900
-%postun -n %{libname}%{major} -p /sbin/ldconfig
+%postun -n %{libname} -p /sbin/ldconfig
 %endif
 
 %clean
@@ -160,14 +166,13 @@ rm -rf %{buildroot}
 %{_mandir}/man1/*
 %{_mandir}/man5/*
 
-%files -n %{libname}%{major}
+%files -n %{libname}
 %defattr(-,root,root)
 %doc COPYING
 %config(noreplace) %{_sysconfdir}/opensc.conf
 %{_libdir}/opensc-pkcs11.*
 %{_libdir}/lib*.so.*
 %{_libdir}/onepin-opensc-pkcs11.so
-
 
 %files -n %{develname}
 %defattr(-,root,root)
