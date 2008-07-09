@@ -120,7 +120,9 @@ mv .%{_libdir}/opensc-signer.so .%{_libdir}/mozilla/plugins/
 rm -f .%{_libdir}/opensc-signer.*
 popd
 
+%if "%{_lib}" = "lib64"
 rm -rf %{buildroot}/usr/lib/mozilla/plugins
+%endif
 
 # remove useless files
 rm -f %{buildroot}%{_libdir}/pkcs11-spy.a \
