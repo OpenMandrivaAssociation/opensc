@@ -9,7 +9,7 @@ Release:	%mkrel 1
 License:	GPL
 Group:		System/Kernel and hardware
 URL:		http://www.opensc.org/
-Source:		http://www.opensc.org/files/%{name}-%{version}.tar.gz
+Source:		http://www.opensc-project.org/files/opensc/%{name}-%{version}.tar.gz
 Source1:	oberthur.profile
 Patch0:		opensc-linkage_fix.diff
 BuildRequires:	flex
