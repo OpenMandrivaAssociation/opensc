@@ -4,14 +4,13 @@
 
 Summary:	Library for accessing SmartCard devices
 Name:		opensc
-Version:	0.11.4
+Version:	0.11.5
 Release:	%mkrel 1
-License:	GPL
+License:	LGPLv2+
 Group:		System/Kernel and hardware
 URL:		http://www.opensc.org/
 Source:		http://www.opensc-project.org/files/opensc/%{name}-%{version}.tar.gz
 Source1:	oberthur.profile
-Patch0:		opensc-linkage_fix.diff
 BuildRequires:	flex
 BuildRequires:	X11-devel
 BuildRequires:	libopenct-devel
@@ -86,22 +85,16 @@ This mozilla plugins handles web signatures using OpenSC
 smartcard library.
 
 %prep
-
 %setup -q
-%patch0 -p0
 
 install -m 0644 %{_sourcedir}/oberthur.profile oberthur-alternate.profile
 
 %build
-libtoolize --copy --force
-aclocal -I aclocal
-autoconf
-autoheader
-automake
-
+./bootstrap
 %configure2_5x \
-    --with-pin-entry=%{_bindir}/pinentry
-
+    --enable-nsplugin \
+    --with-pin-entry=%{_bindir}/pinentry \
+    --with-plugindir=%{_libdir}/mozilla/plugins
 %make
 
 %install
@@ -119,10 +112,6 @@ mkdir -p .%{_libdir}/mozilla/plugins
 mv .%{_libdir}/opensc-signer.so .%{_libdir}/mozilla/plugins/
 rm -f .%{_libdir}/opensc-signer.*
 popd
-
-%if "%{_lib}" == "lib64"
-rm -rf %{buildroot}/usr/lib/mozilla/plugins
-%endif
 
 # remove useless files
 rm -f %{buildroot}%{_libdir}/pkcs11-spy.a \
@@ -149,7 +138,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc NEWS doc/*.css doc/*.html README
+%doc NEWS README
 %doc doc/README oberthur-alternate.profile
 %exclude %{_mandir}/man1/opensc-config*
 %{_bindir}/cardos-info
@@ -159,12 +148,14 @@ rm -rf %{buildroot}
 %{_bindir}/netkey-tool
 %{_bindir}/opensc-explorer
 %{_bindir}/opensc-tool
+%{_bindir}/rutoken-tool
 %{_bindir}/pkcs11-tool
 %{_bindir}/pkcs15-crypt
 %{_bindir}/pkcs15-init
 %{_bindir}/pkcs15-tool
 %{_datadir}/%{name}
 %{_libdir}/pkcs11-spy.*
+%{_libdir}/pkcs11/*.so
 %{_mandir}/man1/*
 %{_mandir}/man5/*
 
@@ -178,7 +169,6 @@ rm -rf %{buildroot}
 
 %files -n %{develname}
 %defattr(-,root,root)
-%doc doc/ChangeLog
 %multiarch %{multiarch_bindir}/opensc-config
 %{_bindir}/opensc-config
 %{_libdir}/lib*.so
