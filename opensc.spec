@@ -5,7 +5,7 @@
 Summary:	Library for accessing SmartCard devices
 Name:		opensc
 Version:	0.11.6
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	LGPLv2+
 Group:		System/Kernel and hardware
 URL:		http://www.opensc.org/
@@ -36,7 +36,6 @@ compatible cards.
 %package -n	%{libname}
 Summary:	Library for accessing SmartCard devices
 Group:		System/Libraries
-License:	LGPL
 Provides: 	%{libname} = %{version}-%{release}
 # because we moved the config file and some modules from the %{name} package
 # to the %{libname} package
@@ -53,7 +52,6 @@ compatible cards.
 %package -n	%{develname}
 Summary:	Development related files for %{name}
 Group:		Development/C
-License:	LGPL
 Provides: 	lib%{name}-devel = %{version}-%{release}
 Provides: 	%{name}-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}
@@ -93,6 +91,8 @@ install -m 0644 %{_sourcedir}/oberthur.profile oberthur-alternate.profile
 ./bootstrap
 %configure2_5x \
     --enable-nsplugin \
+    --enable-pcsc \
+    --enable-openct \
     --with-pin-entry=%{_bindir}/pinentry \
     --with-plugindir=%{_libdir}/mozilla/plugins
 %make
