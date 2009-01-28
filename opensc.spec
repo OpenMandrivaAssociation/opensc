@@ -5,7 +5,7 @@
 Summary:	Library for accessing SmartCard devices
 Name:		opensc
 Version:	0.11.6
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	LGPLv2+
 Group:		System/Kernel and hardware
 URL:		http://www.opensc.org/
@@ -172,13 +172,11 @@ rm -rf %{buildroot}
 %multiarch %{multiarch_bindir}/opensc-config
 %{_bindir}/opensc-config
 %{_libdir}/lib*.so
-%{_libdir}/lib*.a
 %{_libdir}/lib*.la
 %{_libdir}/pkgconfig/*.pc
 %{_includedir}/*
 %{_mandir}/man1/opensc-config*
 %{_mandir}/man3/*
-%{_libdir}/onepin-opensc-pkcs11.a
 %{_libdir}/onepin-opensc-pkcs11.la
 
 %files -n mozilla-plugin-%{name}
