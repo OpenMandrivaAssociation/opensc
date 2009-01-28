@@ -173,6 +173,7 @@ rm -rf %{buildroot}
 %{_bindir}/opensc-config
 %{_libdir}/lib*.so
 %{_libdir}/lib*.la
+%{_libdir}/lib*.a
 %{_libdir}/pkgconfig/*.pc
 %{_includedir}/*
 %{_mandir}/man1/opensc-config*
