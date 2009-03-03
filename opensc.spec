@@ -4,8 +4,8 @@
 
 Summary:	Library for accessing SmartCard devices
 Name:		opensc
-Version:	0.11.6
-Release:	%mkrel 5
+Version:	0.11.7
+Release:	%mkrel 1
 License:	LGPLv2+
 Group:		System/Kernel and hardware
 URL:		http://www.opensc.org/
@@ -142,6 +142,7 @@ rm -rf %{buildroot}
 %doc doc/README oberthur-alternate.profile
 %exclude %{_mandir}/man1/opensc-config*
 %{_bindir}/cardos-info
+%{_bindir}/cardos-tool
 %{_bindir}/cryptoflex-tool
 %{_bindir}/eidenv
 %{_bindir}/piv-tool
