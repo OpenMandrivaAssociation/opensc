@@ -4,8 +4,8 @@
 
 Summary:	Library for accessing SmartCard devices
 Name:		opensc
-Version:	0.11.8
-Release:	%mkrel 2
+Version:	0.11.9
+Release:	%mkrel 1
 License:	LGPLv2+
 Group:		System/Kernel and hardware
 URL:		http://www.opensc.org/
@@ -23,6 +23,7 @@ BuildRequires:	libassuan-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	openssl-devel
 Requires:	pinentry
+Requires: 	%{_lib}pcsclite1
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
