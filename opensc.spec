@@ -5,7 +5,7 @@
 Summary:	Library for accessing SmartCard devices
 Name:		opensc
 Version:	0.11.8
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	LGPLv2+
 Group:		System/Kernel and hardware
 URL:		http://www.opensc.org/
@@ -93,6 +93,7 @@ install -m 0644 %{_sourcedir}/oberthur.profile oberthur-alternate.profile
     --enable-nsplugin \
     --enable-pcsc \
     --enable-openct \
+    --with-pcsc-provider=`find %{_libdir} -name libpcsclite.so.*|sort|head -n 1` \
     --with-pin-entry=%{_bindir}/pinentry \
     --with-plugindir=%{_libdir}/mozilla/plugins
 %make
