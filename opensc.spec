@@ -94,7 +94,6 @@ install -m 0644 %{_sourcedir}/oberthur.profile oberthur-alternate.profile
     --enable-nsplugin \
     --enable-pcsc \
     --enable-openct \
-    --with-pcsc-provider=`find %{_libdir} -name libpcsclite.so.*|sort|head -n 1` \
     --with-pin-entry=%{_bindir}/pinentry \
     --with-plugindir=%{_libdir}/mozilla/plugins
 %make
