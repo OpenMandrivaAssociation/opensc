@@ -5,13 +5,14 @@
 Summary:	Library for accessing SmartCard devices
 Name:		opensc
 Version:	0.11.13
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	LGPLv2+
 Group:		System/Kernel and hardware
 URL:		http://www.opensc.org/
 Source:		http://www.opensc-project.org/files/opensc/%{name}-%{version}.tar.gz
 Source1:	oberthur.profile
 Patch0:		opensc-libassuan-2.patch
+Patch1:		opensc-0.11.13-pcsclite-1.6.patch
 BuildRequires:	flex
 BuildRequires:	X11-devel
 BuildRequires:	libopenct-devel
@@ -87,6 +88,7 @@ smartcard library.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p0
 
 install -m 0644 %{_sourcedir}/oberthur.profile oberthur-alternate.profile
 
