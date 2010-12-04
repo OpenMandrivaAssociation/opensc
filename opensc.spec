@@ -13,6 +13,7 @@ Source:		http://www.opensc-project.org/files/opensc/%{name}-%{version}.tar.gz
 Source1:	oberthur.profile
 Patch0:		opensc-libassuan-2.patch
 Patch1:		opensc-0.11.13-pcsclite-1.6.patch
+Patch2:		opensc-0.11.13-no-locking.patch
 BuildRequires:	flex
 BuildRequires:	X11-devel
 BuildRequires:	libopenct-devel
@@ -20,12 +21,12 @@ BuildRequires:	libxslt-proc
 BuildRequires:	readline-devel
 BuildRequires:	termcap-devel
 # opensc 0.10.0 requires at least pcsc-lite 1.2.9
-BuildRequires:  libpcsclite-devel >= 1.2.9
+BuildRequires:	libpcsclite-devel >= 1.2.9
 BuildRequires:	libassuan-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	openssl-devel
 Requires:	pinentry
-Requires: 	%{_lib}pcsclite1
+Requires:	%{_lib}pcsclite1
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -39,7 +40,7 @@ compatible cards.
 %package -n	%{libname}
 Summary:	Library for accessing SmartCard devices
 Group:		System/Libraries
-Provides: 	%{libname} = %{version}-%{release}
+Provides:	%{libname} = %{version}-%{release}
 # because we moved the config file and some modules from the %{name} package
 # to the %{libname} package
 Conflicts:	%{name} < 0.10.0-1mdk
@@ -55,11 +56,11 @@ compatible cards.
 %package -n	%{develname}
 Summary:	Development related files for %{name}
 Group:		Development/C
-Provides: 	lib%{name}-devel = %{version}-%{release}
-Provides: 	%{name}-devel = %{version}-%{release}
+Provides:	lib%{name}-devel = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}
 Conflicts:	%{mklibname opensc 0 -d}
-Obsoletes:      %{mklibname opensc 2 -d} < 0.11.3
+Obsoletes:	%{mklibname opensc 2 -d} < 0.11.3
 
 %description -n	%{develname}
 %{name} is a library for accessing smart card devices using PC/SC Lite
@@ -89,6 +90,7 @@ smartcard library.
 %setup -q
 %patch0 -p1
 %patch1 -p0
+%patch2 -p0
 
 install -m 0644 %{_sourcedir}/oberthur.profile oberthur-alternate.profile
 
