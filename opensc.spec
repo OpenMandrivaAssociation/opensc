@@ -18,6 +18,7 @@ BuildRequires:	readline-devel
 BuildRequires:	zlib-devel
 BuildRequires:	pcsc-lite-devel
 BuildRequires:	xsltproc
+BuildRequires:	docbook-style-xsl
 Requires:	%{_lib}pcsclite1
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
