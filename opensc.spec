@@ -1,4 +1,4 @@
-%define major 2
+%define major 3
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname -d %{name}
 
@@ -131,7 +131,7 @@ rm -rf %{buildroot}
 %doc COPYING
 %config(noreplace) %{_sysconfdir}/opensc.conf
 %{_libdir}/opensc-pkcs11.*
-%{_libdir}/lib*.so.*
+%{_libdir}/lib*.so.%{major}*
 %{_libdir}/onepin-opensc-pkcs11.so
 
 %files -n %{develname}
