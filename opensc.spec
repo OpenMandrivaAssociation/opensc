@@ -116,7 +116,6 @@ rm -rf %{buildroot}
 %{_bindir}/netkey-tool
 %{_bindir}/opensc-explorer
 %{_bindir}/opensc-tool
-%{_bindir}/rutoken-tool
 %{_bindir}/pkcs11-tool
 %{_bindir}/pkcs15-crypt
 %{_bindir}/pkcs15-init
