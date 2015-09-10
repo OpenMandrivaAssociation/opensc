@@ -64,8 +64,11 @@ applications or libraries that use %{name}.
 install -m 0644 %{SOURCE1} oberthur-alternate.profile
 
 %build
+sed -i -e 's|"/lib /usr/lib\b|"/%{_lib} %{_libdir}|' configure # lib64 rpaths
 %configure \
 	--disable-static \
+	--disable-assert \
+	--enable-pcsc \
 	--enable-sm
 %make
 
@@ -79,6 +82,7 @@ mkdir -p %{buildroot}%{_libdir}/pkcs11
 %doc oberthur-alternate.profile
 %{_bindir}/cardos-tool
 %{_bindir}/cryptoflex-tool
+%{_bindir}/dnie-tool
 %{_bindir}/eidenv
 %{_bindir}/iasecc-tool
 %{_bindir}/netkey-tool
@@ -91,6 +95,7 @@ mkdir -p %{buildroot}%{_libdir}/pkcs11
 %{_bindir}/pkcs15-init
 %{_bindir}/pkcs15-tool
 %{_bindir}/sc-hsm-tool
+%{_sysconfdir}/bash_completion.d/*
 %{_datadir}/%{name}
 %{_libdir}/pkcs11-spy.*
 %{_libdir}/pkcs11/*.so
@@ -101,9 +106,8 @@ mkdir -p %{buildroot}%{_libdir}/pkcs11
 %config(noreplace) %{_sysconfdir}/opensc.conf
 %{_libdir}/opensc-pkcs11.*
 %{_libdir}/lib*.so.%{major}*
-#{_libdir}/onepin-opensc-pkcs11.so
+%{_libdir}/onepin-opensc-pkcs11.so
 
 %files -n %{devname}
 %{_bindir}/westcos-tool
 %{_libdir}/lib*.so
-
