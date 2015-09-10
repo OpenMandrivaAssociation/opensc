@@ -1,11 +1,11 @@
-%define major	3
+%define major 3
 %define libname %mklibname %{name} %{major}
 %define devname %mklibname -d %{name}
 
 Summary:	Library for accessing SmartCard devices
 Name:		opensc
-Version:	0.13.0
-Release:	14
+Version:	0.15.0
+Release:	1
 License:	LGPLv2+
 Group:		System/Kernel and hardware
 Url:		http://sourceforge.net/projects/opensc/
@@ -30,7 +30,7 @@ ISO 7816-4 compatible smart card. Encryption and decryption using private
 keys on the SmartCard is at the moment possible only with PKCS #15
 compatible cards.
 
-%package -n	%{libname}
+%package -n %{libname}
 Summary:	Library for accessing SmartCard devices
 Group:		System/Libraries
 
@@ -42,11 +42,11 @@ ISO 7816-4 compatible smart card. Encryption and decryption using private
 keys on the SmartCard is at the moment possible only with PKCS #15
 compatible cards.
 
-%package -n	%{devname}
+%package -n %{devname}
 Summary:	Development related files for %{name}
 Group:		Development/C
-Provides:	%{name}-devel = %{version}-%{release}
-Requires:	%{libname} = %{version}-%{release}
+Provides:	%{name}-devel = %{EVRD}
+Requires:	%{libname} = %{EVRD}
 
 %description -n	%{devname}
 %{name} is a library for accessing smart card devices using PC/SC Lite
@@ -64,7 +64,7 @@ applications or libraries that use %{name}.
 install -m 0644 %{SOURCE1} oberthur-alternate.profile
 
 %build
-%configure2_5x \
+%configure \
 	--disable-static \
 	--enable-sm
 %make
