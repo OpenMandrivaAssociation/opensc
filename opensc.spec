@@ -5,7 +5,7 @@
 Summary:	Library for accessing SmartCard devices
 Name:		opensc
 Version:	0.15.0
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Kernel and hardware
 Url:		http://sourceforge.net/projects/opensc/
@@ -68,6 +68,7 @@ sed -i -e 's|"/lib /usr/lib\b|"/%{_lib} %{_libdir}|' configure # lib64 rpaths
 %configure \
 	--disable-static \
 	--disable-assert \
+	--enable-openssl \
 	--enable-pcsc \
 	--enable-sm
 %make
