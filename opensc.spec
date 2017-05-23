@@ -11,7 +11,7 @@ Group:		System/Kernel and hardware
 Url:		http://sourceforge.net/projects/opensc/
 Source0:	http://downloads.sourceforge.net/project/opensc/OpenSC/%{name}-%{version}/%{name}-%{version}.tar.gz
 Source1:	oberthur.profile
-
+Source2:	%{name}.rpmlintrc
 BuildRequires:	docbook-style-xsl
 BuildRequires:	flex
 BuildRequires:	xsltproc
