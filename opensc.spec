@@ -1,4 +1,4 @@
-%define major 3
+%define major 4
 %define libname %mklibname %{name} %{major}
 %define devname %mklibname -d %{name}
 
@@ -96,6 +96,7 @@ mkdir -p %{buildroot}%{_libdir}/pkcs11
 %{_bindir}/pkcs15-init
 %{_bindir}/pkcs15-tool
 %{_bindir}/sc-hsm-tool
+%{_bindir}/gids-tool
 %{_sysconfdir}/bash_completion.d/*
 %{_datadir}/%{name}
 %{_libdir}/pkcs11-spy.*
