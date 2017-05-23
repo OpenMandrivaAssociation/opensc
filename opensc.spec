@@ -5,7 +5,7 @@
 Summary:	Library for accessing SmartCard devices
 Name:		opensc
 Version:	0.16.0
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Kernel and hardware
 Url:		http://sourceforge.net/projects/opensc/
@@ -21,6 +21,8 @@ BuildRequires:	pkgconfig(libpcsclite)
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(sm)
 BuildRequires:	pkgconfig(zlib)
+Conflicts:	%{mklibname opensc 4} < 0.16.0-2
+Conflicts:	%{mklibname opensc 3} < 0.16.0-2
 
 %description
 %{name} is a library for accessing smart card devices using PC/SC Lite
@@ -33,6 +35,7 @@ compatible cards.
 %package -n %{libname}
 Summary:	Library for accessing SmartCard devices
 Group:		System/Libraries
+Obsoletes:	%{mklibname opensc 3} < %{EVRD}
 
 %description -n	%{libname}
 %{name} is a library for accessing smart card devices using PC/SC Lite
@@ -65,12 +68,14 @@ install -m 0644 %{SOURCE1} oberthur-alternate.profile
 
 %build
 sed -i -e 's|"/lib /usr/lib\b|"/%{_lib} %{_libdir}|' configure # lib64 rpaths
+
 %configure \
 	--disable-static \
 	--disable-assert \
 	--enable-openssl \
 	--enable-pcsc \
 	--enable-sm
+
 %make
 
 %install
@@ -81,6 +86,7 @@ mkdir -p %{buildroot}%{_libdir}/pkcs11
 %files
 %doc NEWS README COPYING
 %doc oberthur-alternate.profile
+%config(noreplace) %{_sysconfdir}/opensc.conf
 %{_bindir}/cardos-tool
 %{_bindir}/cryptoflex-tool
 %{_bindir}/dnie-tool
@@ -101,14 +107,13 @@ mkdir -p %{buildroot}%{_libdir}/pkcs11
 %{_datadir}/%{name}
 %{_libdir}/pkcs11-spy.*
 %{_libdir}/pkcs11/*.so
+%{_libdir}/opensc-pkcs11.*
+%{_libdir}/onepin-opensc-pkcs11.so
 %{_mandir}/man1/*
 %{_mandir}/man5/*
 
 %files -n %{libname}
-%config(noreplace) %{_sysconfdir}/opensc.conf
-%{_libdir}/opensc-pkcs11.*
 %{_libdir}/lib*.so.%{major}*
-%{_libdir}/onepin-opensc-pkcs11.so
 
 %files -n %{devname}
 %{_bindir}/westcos-tool
