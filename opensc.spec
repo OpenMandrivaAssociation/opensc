@@ -1,4 +1,4 @@
-%define major 4
+%define major 5
 %define libname %mklibname %{name} %{major}
 %define devname %mklibname -d %{name}
 
@@ -96,6 +96,7 @@ mkdir -p %{buildroot}%{_libdir}/pkcs11
 %{_bindir}/openpgp-tool
 %{_bindir}/opensc-explorer
 %{_bindir}/opensc-tool
+%{_bindir}/npa-tool
 %{_bindir}/piv-tool
 %{_bindir}/pkcs11-tool
 %{_bindir}/pkcs15-crypt
