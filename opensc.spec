@@ -119,3 +119,4 @@ mkdir -p %{buildroot}%{_libdir}/pkcs11
 %files -n %{devname}
 %{_bindir}/westcos-tool
 %{_libdir}/lib*.so
+%{_libdir}/pkgconfig/*.pc
