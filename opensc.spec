@@ -21,6 +21,8 @@ BuildRequires:	pkgconfig(libpcsclite)
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(sm)
 BuildRequires:	pkgconfig(zlib)
+BuildRequires:	pkgconfig(gio-2.0)
+BuildRequires:	pkgconfig(cmocka)
 Conflicts:	%{mklibname opensc 4} < 0.16.0-2
 Conflicts:	%{mklibname opensc 3} < 0.16.0-2
 
