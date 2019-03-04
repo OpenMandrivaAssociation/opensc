@@ -89,15 +89,19 @@ mkdir -p %{buildroot}%{_libdir}/pkcs11
 %files
 %doc NEWS README COPYING
 %doc oberthur-alternate.profile
+%doc %{_docdir}/opensc/opensc.conf
 %config(noreplace) %{_sysconfdir}/opensc.conf
 %{_bindir}/cardos-tool
 %{_bindir}/cryptoflex-tool
 %{_bindir}/dnie-tool
+%{_bindir}/egk-tool
 %{_bindir}/eidenv
 %{_bindir}/iasecc-tool
 %{_bindir}/netkey-tool
 %{_bindir}/openpgp-tool
+%{_bindir}/opensc-asn1
 %{_bindir}/opensc-explorer
+%{_bindir}/opensc-notify
 %{_bindir}/opensc-tool
 %{_bindir}/npa-tool
 %{_bindir}/piv-tool
@@ -109,6 +113,7 @@ mkdir -p %{buildroot}%{_libdir}/pkcs11
 %{_bindir}/gids-tool
 %{_sysconfdir}/bash_completion.d/*
 %{_datadir}/%{name}
+%{_datadir}/applications/org.opensc.notify.desktop
 %{_libdir}/pkcs11-spy.*
 %{_libdir}/pkcs11/*.so
 %{_libdir}/opensc-pkcs11.*
