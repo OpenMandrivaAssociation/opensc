@@ -4,8 +4,8 @@
 
 Summary:	Library for accessing SmartCard devices
 Name:		opensc
-Version:	0.17.0
-Release:	2
+Version:	0.19.0
+Release:	1
 License:	LGPLv2+
 Group:		System/Kernel and hardware
 Url:		http://sourceforge.net/projects/opensc/
@@ -37,7 +37,7 @@ Summary:	Library for accessing SmartCard devices
 Group:		System/Libraries
 Obsoletes:	%{mklibname opensc 3} < %{EVRD}
 
-%description -n	%{libname}
+%description -n %{libname}
 %{name} is a library for accessing smart card devices using PC/SC Lite
 middleware package. It is also the core library of the OpenSC project.
 Basic functionality (e.g. SELECT FILE, READ BINARY) should work on any
@@ -63,7 +63,7 @@ This package contains all necessary files to develop or compile any
 applications or libraries that use %{name}. 
 
 %prep
-%setup -q
+%autosetup -p1
 install -m 0644 %{SOURCE1} oberthur-alternate.profile
 
 %build
@@ -76,12 +76,12 @@ sed -i -e 's|"/lib /usr/lib\b|"/%{_lib} %{_libdir}|' configure # lib64 rpaths
 	--enable-pcsc \
 	--enable-sm
 
-%make
+%make_build
 
 %install
 mkdir -p %{buildroot}%{_sysconfdir}
 mkdir -p %{buildroot}%{_libdir}/pkcs11
-%makeinstall_std
+%make_install
 
 %files
 %doc NEWS README COPYING
