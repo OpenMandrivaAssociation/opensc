@@ -12,6 +12,7 @@ Url:		http://sourceforge.net/projects/opensc/
 Source0:	http://downloads.sourceforge.net/project/opensc/OpenSC/%{name}-%{version}/%{name}-%{version}.tar.gz
 Source1:	oberthur.profile
 Source2:	%{name}.rpmlintrc
+Patch0:	opensc-0.19.0-p11test_common.h.patch
 BuildRequires:	docbook-style-xsl
 BuildRequires:	flex
 BuildRequires:	xsltproc
