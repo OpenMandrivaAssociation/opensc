@@ -71,6 +71,7 @@ install -m 0644 %{SOURCE1} oberthur-alternate.profile
 
 %build
 sed -i -e 's|"/lib /usr/lib\b|"/%{_lib} %{_libdir}|' configure # lib64 rpaths
+sed -i 's!-Werror!!g' configure configure.ac
 
 %configure \
 	--disable-static \
