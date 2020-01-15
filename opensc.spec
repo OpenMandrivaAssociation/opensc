@@ -4,15 +4,13 @@
 
 Summary:	Library for accessing SmartCard devices
 Name:		opensc
-Version:	0.19.0
+Version:	0.20.0
 Release:	1
 License:	LGPLv2+
 Group:		System/Kernel and hardware
-Url:		http://sourceforge.net/projects/opensc/
-Source0:	http://downloads.sourceforge.net/project/opensc/OpenSC/%{name}-%{version}/%{name}-%{version}.tar.gz
+Url:		https://github.com/OpenSC
+Source0:	https://github.com/OpenSC/OpenSC/archive/%{version}.tar.gz
 Source1:	oberthur.profile
-Source2:	%{name}.rpmlintrc
-Patch0:	opensc-0.19.0-p11test_common.h.patch
 BuildRequires:	docbook-style-xsl
 BuildRequires:	flex
 BuildRequires:	xsltproc
@@ -66,11 +64,12 @@ This package contains all necessary files to develop or compile any
 applications or libraries that use %{name}. 
 
 %prep
-%autosetup -p1
+%autosetup -n OpenSC-%{version}
+%autopatch -p1
 install -m 0644 %{SOURCE1} oberthur-alternate.profile
 
 %build
-sed -i -e 's|"/lib /usr/lib\b|"/%{_lib} %{_libdir}|' configure # lib64 rpaths
+./bootstrap
 sed -i 's!-Werror!!g' configure configure.ac
 
 %configure \
@@ -112,9 +111,12 @@ mkdir -p %{buildroot}%{_libdir}/pkcs11
 %{_bindir}/pkcs15-tool
 %{_bindir}/sc-hsm-tool
 %{_bindir}/gids-tool
+%{_bindir}/goid-tool
+%{_bindir}/pkcs11-register
 %{_sysconfdir}/bash_completion.d/*
 %{_datadir}/%{name}
 %{_datadir}/applications/org.opensc.notify.desktop
+%{_sysconfdir}/xdg/autostart/pkcs11-register.desktop
 %{_libdir}/pkcs11-spy.*
 %{_libdir}/pkcs11/*.so
 %{_libdir}/opensc-pkcs11.*

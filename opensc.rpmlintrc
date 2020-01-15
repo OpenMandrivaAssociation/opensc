@@ -1,3 +1,0 @@
-addFilter("E: invalid-soname")
-addFilter("E: incoherent-version-in-name")
-addFilter("E: executable-in-library-package")
