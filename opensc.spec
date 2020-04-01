@@ -120,7 +120,6 @@ mkdir -p %{buildroot}%{_libdir}/pkcs11
 %{_sysconfdir}/bash_completion.d/*
 %{_datadir}/%{name}
 %{_datadir}/applications/org.opensc.notify.desktop
-%{_sysconfdir}/xdg/autostart/pkcs11-register.desktop
 %{_libdir}/pkcs11-spy.*
 %{_libdir}/pkcs11/*.so
 %{_libdir}/opensc-pkcs11.*
