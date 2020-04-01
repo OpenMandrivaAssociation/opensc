@@ -5,7 +5,7 @@
 Summary:	Library for accessing SmartCard devices
 Name:		opensc
 Version:	0.20.0
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Kernel and hardware
 Url:		https://github.com/OpenSC
@@ -15,12 +15,13 @@ BuildRequires:	docbook-style-xsl
 BuildRequires:	flex
 BuildRequires:	xsltproc
 BuildRequires:	libltdl-devel
-BuildRequires:	readline-devel
+BuildRequires:	pkgconfig(readline)
 BuildRequires:	pkgconfig(libpcsclite)
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(sm)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(gio-2.0)
+BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(cmocka)
 Conflicts:	%{mklibname opensc 4} < 0.16.0-2
 Conflicts:	%{mklibname opensc 3} < 0.16.0-2
@@ -77,7 +78,10 @@ sed -i 's!-Werror!!g' configure configure.ac
 	--disable-assert \
 	--enable-openssl \
 	--enable-pcsc \
-	--enable-sm
+	--enable-sm \
+	--enable-zlib \
+	--enable-notify \
+	--disable-autostart-items
 
 %make_build
 
