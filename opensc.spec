@@ -23,8 +23,10 @@ BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(cmocka)
+BuildRequires:	pkgconfig(bash-completion)
 Conflicts:	%{mklibname opensc 4} < 0.16.0-2
 Conflicts:	%{mklibname opensc 3} < 0.16.0-2
+Requires:	pcsc-lite
 
 %description
 %{name} is a library for accessing smart card devices using PC/SC Lite
@@ -72,6 +74,7 @@ install -m 0644 %{SOURCE1} oberthur-alternate.profile
 %build
 ./bootstrap
 sed -i 's!-Werror!!g' configure configure.ac
+sed -i -e 's|"/lib /usr/lib\b|"/%{_lib} %{_libdir}|' configure # lib64 rpaths
 
 %configure \
 	--disable-static \
