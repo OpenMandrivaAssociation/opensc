@@ -11,7 +11,6 @@ Group:		System/Kernel and hardware
 Url:		https://github.com/OpenSC
 Source0:	https://github.com/OpenSC/OpenSC/archive/%{version}.tar.gz
 Source1:	oberthur.profile
-Source0:	https://github.com/OpenSC/OpenSC/archive/%{version}.tar.gz
 Patch0:	opensc-0.20.0-no-common.patch	
 # https://github.com/OpenSC/OpenSC/commit/8551e84d
 Patch1:	opensc-0.20.0-lto-build.patch
