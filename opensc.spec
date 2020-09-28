@@ -123,7 +123,7 @@ mkdir -p %{buildroot}%{_libdir}/pkcs11
 %{_bindir}/gids-tool
 %{_bindir}/goid-tool
 %{_bindir}/pkcs11-register
-%{_datadir}/bash_completion.d/*
+%{_datadir}/bash-completion/completions/*
 %{_datadir}/%{name}
 %{_datadir}/applications/org.opensc.notify.desktop
 %{_libdir}/pkcs11-spy.*
