@@ -14,6 +14,11 @@ Source1:	oberthur.profile
 Patch0:	opensc-0.20.0-no-common.patch	
 # https://github.com/OpenSC/OpenSC/commit/8551e84d
 Patch1:	opensc-0.20.0-lto-build.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	docbook-style-xsl
 BuildRequires:	flex
 BuildRequires:	xsltproc
