@@ -5,7 +5,7 @@
 Summary:	Library for accessing SmartCard devices
 Name:		opensc
 Version:	0.20.0
-Release:	4
+Release:	5
 License:	LGPLv2+
 Group:		System/Kernel and hardware
 Url:		https://github.com/OpenSC
