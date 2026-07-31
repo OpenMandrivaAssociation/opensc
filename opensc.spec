@@ -4,16 +4,16 @@
 
 Summary:	Library for accessing SmartCard devices
 Name:		opensc
-Version:	0.20.0
-Release:	5
+Version:	0.27.1
+Release:	1
 License:	LGPLv2+
 Group:		System/Kernel and hardware
 Url:		https://github.com/OpenSC
 Source0:	https://github.com/OpenSC/OpenSC/archive/%{version}.tar.gz
 Source1:	oberthur.profile
-Patch0:	opensc-0.20.0-no-common.patch	
+# dropped (no longer applies): Patch0:	opensc-0.27.1-no-common.patch	
 # https://github.com/OpenSC/OpenSC/commit/8551e84d
-Patch1:	opensc-0.20.0-lto-build.patch
+# dropped (no longer applies): Patch1:	opensc-0.27.1-lto-build.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool-base
@@ -75,7 +75,7 @@ This package contains all necessary files to develop or compile any
 applications or libraries that use %{name}. 
 
 %prep
-%autosetup -n OpenSC-%{version} -p1
+%autosetup -n OpenSC-0.27.1 -p1
 
 install -m 0644 %{SOURCE1} oberthur-alternate.profile
 
